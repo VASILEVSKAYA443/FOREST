@@ -1,16 +1,13 @@
 # FOREST
-# Подключение библиотек
-import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
-
-# Считываения файла
-df = pd.read_csv("./data/transport_data.csv")
+import pandas as pd # Подключение библиотек
+from sklearn.ensemble import GradientBoostingClassifier# Подключение библиотек
+df = pd.read_csv("./data/transport_data.csv")# Считываения файла
 
 df.drop(df.index[df.label == '-'].tolist(), axis = 0, inplace = True) # Удаляем записи с "-"
 
 df.request_ts = df.request_ts - df.trans_ts # Заменяем requst_ts на разницу между request_ts и trans_ts
 
-df.trans_ts = pd.to_datetime(df.trans_ts, unit='s') # Переводим формат колонки trans_ts формат datetime ???????????????????????????????
+df.trans_ts = pd.to_datetime(df.trans_ts, unit='s') # Переводим формат колонки trans_ts формат datetime 
 df['second_trans_ts'] = df.trans_ts.dt.second
 df['minute_trans_ts'] = df.trans_ts.dt.minute
 df['hour_trans_ts'] = df.trans_ts.dt.hour
